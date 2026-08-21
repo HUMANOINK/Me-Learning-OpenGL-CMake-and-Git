@@ -68,7 +68,7 @@ void CompileShader(GLuint const Shader, char const *const ShaderFilepath, std::s
     delete[] Source;
     CompileShader(Shader, At);
 }
-GLuint CreateCompiledShader(GLenum ShaderType, char const *ShaderFilepath, std::source_location const &At) {
+GLuint CreateCompiledShader(GLenum const ShaderType, char const *const ShaderFilepath, std::source_location const &At) {
     GLuint const Shader = glCreateShader(ShaderType);
     CompileShader(Shader, ShaderFilepath, At);
     return Shader;
@@ -137,7 +137,7 @@ GLuint CreateLinkedShaderProgram(GLuint const VertexShader, GLuint const Fragmen
     glDetachShader(ShaderProgram, FragmentShader);
     return ShaderProgram;
 }
-GLuint CreateLinkedShaderProgram(char const *VertexShaderFilepath, char const *FragmentShaderFilepath, std::source_location const &At) {
+GLuint CreateLinkedShaderProgram(char const *const VertexShaderFilepath, char const *const FragmentShaderFilepath, std::source_location const &At) {
     GLuint const VertexShader = CreateCompiledShader(GL_VERTEX_SHADER, VertexShaderFilepath, At),
                FragmentShader = CreateCompiledShader(GL_FRAGMENT_SHADER, FragmentShaderFilepath, At);
     GLuint const ShaderProgram = CreateLinkedShaderProgram(VertexShader, FragmentShader, At);
@@ -148,8 +148,10 @@ GLuint CreateLinkedShaderProgram(char const *VertexShaderFilepath, char const *F
 GLint GetUniformLocation(GLuint const Program, GLchar const *const UniformName) {
     GLint Location = glGetUniformLocation(Program, UniformName);
     #ifndef NDEBUG_OPENGL
-        if(Location < 0) [[unlikely]]
+        if(Location < 0) [[unlikely]] {
             std::fprintf(stderr, "Failed to retrieve location of uniform \"%s\"\n", UniformName);
+            //std::exit(EXIT_FAILURE);
+        }
     #endif
     return Location;
 }

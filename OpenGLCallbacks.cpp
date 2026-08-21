@@ -73,8 +73,7 @@
         ) {
             std::fprintf(stderr, "[OpenGL Error]\t\tSource: %s\t\tType: %s\t\tID: 0x%04X\t\tSeverity: %s\nMessage: %s\n",
                         OGLErrorSource(source), OGLErrorType(type), id, OGLErrorSeverity(severity), message);
-            if(severity != GL_DEBUG_SEVERITY_NOTIFICATION)
-                std::exit(EXIT_FAILURE);
+            std::fflush(stderr);
         }
     EXTERN_C_BLOCK_END
 #endif
