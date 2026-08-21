@@ -145,14 +145,11 @@ GLuint CreateLinkedShaderProgram(char const *VertexShaderFilepath, char const *F
     glDeleteShader(FragmentShader);
     return ShaderProgram;
 }
-GLint GetUniformLocation(GLuint const Program, GLchar const *const UniformName, std::source_location const &At) {
+GLint GetUniformLocation(GLuint const Program, GLchar const *const UniformName) {
     GLint Location = glGetUniformLocation(Program, UniformName);
     #ifndef NDEBUG_OPENGL
-        if(Location < 0) [[unlikely]] {
-            std::fprintf(stderr, "Failed to retrieve location of uniform \"%s\"\nAt:\n", UniformName);
-            PrintLocation(At, stderr);
-            std::exit(EXIT_FAILURE);
-        }
+        if(Location < 0) [[unlikely]]
+            std::fprintf(stderr, "Failed to retrieve location of uniform \"%s\"\n", UniformName);
     #endif
     return Location;
 }

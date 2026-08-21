@@ -3,18 +3,17 @@
     #include <cstdio>
 #endif
 #include <cmath>
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glad/gl.h>
 #include "CompileTimeConstants.hpp"
 #include "GLFWCallbacks.hpp"
 EXTERN_C_BLOCK_START
     #ifndef NDEBUG_GLFW
-    [[noreturn]] void HandleGLFWError([[maybe_unused]] int const error_code, [[maybe_unused]] char const *const description) {
-        std::fprintf(stderr, "[GLFW Error]\t\tCode: 0x%04X\tDecription: %s\n", error_code, description);
-        std::exit(EXIT_FAILURE);
-    }
+        [[noreturn]] void HandleGLFWError([[maybe_unused]] int const error_code, [[maybe_unused]] char const *const description) {
+            std::fprintf(stderr, "[GLFW Error]\t\tCode: 0x%04X\tDecription: %s\n", error_code, description);
+            std::exit(EXIT_FAILURE);
+        }
     #endif
     void HandleFramebufferSize(GLFWwindow *const, int const width, int const height) {
         glViewport(0, 0, width, height);
