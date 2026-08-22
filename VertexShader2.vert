@@ -19,5 +19,5 @@ void main() {
         mat3 InverseDifferential = (ModelViewProjMat[3].w * ModelViewProjMat[3].w) * inverse(SubexpressionOfDifferential);
         gl_PointSize = ModelSpacePointSize * inversesqrt(length(cross(InverseDifferential[0], InverseDifferential[1])));
     }
-    gl_Position = vec4(ModelViewProjMat[3]);
+    gl_Position = ModelViewProjMat[3];
 }
