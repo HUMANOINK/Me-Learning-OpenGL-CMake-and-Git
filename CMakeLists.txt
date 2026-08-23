@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 4.2)
 project(LearnOpenGL)
 include(CheckIPOSupported)
 check_ipo_supported(RESULT IPOsupport LANGUAGES C CXX)
